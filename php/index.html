@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>PHP</h1>
+    <form action="socket.php" method="post">
+        <input type="text" name="title">
+        <input type="text" name="body">
+        <input type="submit" value="Notificar">
+    </form>
+    <script src="http://localhost:3333/socket.io/socket.io.js">
+    </script>
+    <script>
+        Notification.requestPermission();
+        const socket = io('http://localhost:3333');
+        socket.on('show notify', (data) => {
+            new Notification(data.title, {
+                body: data.body,
+            })
+        })
+    </script>
+</body>
+</html>
